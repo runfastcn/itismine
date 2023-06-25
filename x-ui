@@ -1,0 +1,33 @@
+1. 甲骨文云获取root权限和设置密码
+#!/bin/bash
+echo root:PASSWORD |sudo chpasswd root
+sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
+sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
+sudo reboot
+
+2. 关闭甲骨文云防火墙
+2.1 开放所有端口
+iptables -P INPUT ACCEPT
+iptables -P FORWARD ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -F
+2.2 关闭或强制删除防火墙
+apt-get purge netfilter-persistent && reboot
+
+3. 设置域名及添加A记录
+
+4. 更新及安装组件
+apt update -y
+apt install -y curl socat
+
+5. 安装证书
+~/.acme.sh/acme.sh --register-account -m xxxx@xxxx.com
+~/.acme.sh/acme.sh  --issue -d mydomain.com   --standalone
+~/.acme.sh/acme.sh --installcert -d mydomain.com --key-file /root/private.key --fullchain-file /root/cert.crt
+
+6. 安装改版x-ui
+bash <(curl -Ls https://raw.githubusercontent.com/FranzKafkaYu/x-ui/master/install.sh)
+
+7. 证书地址
+公钥: /root/cert.crt
+私钥: /root/private.key
