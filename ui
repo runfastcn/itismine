@@ -21,6 +21,7 @@ apt update -y
 apt install -y curl socat
 
 5. 安装证书
+curl https://get.acme.sh | sh
 ~/.acme.sh/acme.sh --register-account -m xxxx@xxxx.com
 ~/.acme.sh/acme.sh  --issue -d mydomain.com   --standalone
 ~/.acme.sh/acme.sh --installcert -d mydomain.com --key-file /root/private.key --fullchain-file /root/cert.crt
