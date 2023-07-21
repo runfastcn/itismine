@@ -19,6 +19,7 @@ apt-get purge netfilter-persistent && reboot
 4. 更新及安装组件
 apt update -y
 apt install -y curl socat
+apt install -y cron
 
 5. 安装证书
 curl https://get.acme.sh | sh
